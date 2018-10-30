@@ -41,6 +41,7 @@
 #### Basic Improvments (Plan): finish by October 30th
 - [ ] create indivdiual items
   -create individual items by using append method.
+  -redisplay items from the local storage.
     - the latest entry to the input will be at the top of the show text.
     
 - [ ] delete individual items
