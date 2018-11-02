@@ -23,7 +23,7 @@ $(document).ready(function(){
     //iterate through storage
     for (var i = 0; i < array.length; i++) {
       //append lis as itereate.
-      $('.show-text').append("<li data-me='alex' data-key=" + array.key(i) + ">"  + array.getItem(array.key(i)) + "<input class='check' type='checkbox'>" + "</li>")
+      $('.show-text').append("<li data-key=" + array.key(i) + ">"  + array.getItem(array.key(i))  +  "<button class='edit-btn'>Edit</button>" + "</li>")
     }
       //NOTE: run this on page loads and when i add a new item.
   }
@@ -44,9 +44,7 @@ $(document).ready(function(){
     localStorage.setItem(curKeyValue, curTextValue,);
     //$('.show-text').append('<li>' + curTextValue + '</li>');
     //console.log(localStorage[0])
-    var obj = {}
-    obj.key = localStorage
-    console.log(obj)
+
     iterator(localStorage)
     
   });
@@ -67,17 +65,28 @@ $(document).ready(function(){
  //      });
 
 
-  $(".edit").on('click', function() {
-    console.log()
-    if($('input[type=checkbox]').prop('checked')) {
-     
+  $(".edit-btn").on('click', function() {
+    console.log(event)
+    var curTextValue = $('#theKey').val();
+    var itemName = event.target.dataset.key;
+    for (key in localStorage) {
+      if (key ===  itemName)  {
+        localStorage(key) = curTextValue;
       }
-    
+    }
+    iterator(localStorage)
   })
-      
+
+  // $(".edit").on('click', function() {
+  //   $('.check').change(function() {
+  //     if (this.checked){
+  //       console.log('this');
+  //     }
+  //   });
+  // })
   
     $("ul").on('dblclick', function(){
-    console.log(event.target.dataset)
+    console.log(event.target.dataset.key)
 
     var itemName = event.target.dataset.key;
     
