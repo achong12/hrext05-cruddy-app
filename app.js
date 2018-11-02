@@ -17,12 +17,13 @@ $(document).ready(function(){
   }
   //write a utility function
   var iterator = function(array) {
+
     //clear the .show-text
     $(".show-text").empty();
     //iterate through storage
     for (var i = 0; i < array.length; i++) {
       //append lis as itereate.
-      $('.show-text').append('<li>' + array.getItem(array.key(i)) + '</li>')
+      $('.show-text').append("<li data-me='alex' data-key=" + array.key(i) + ">"  + array.getItem(array.key(i)) + "<input class='check' type='checkbox'>" + "</li>")
     }
       //NOTE: run this on page loads and when i add a new item.
   }
@@ -40,10 +41,12 @@ $(document).ready(function(){
       var getID = makeIDGenerator(localStorage.length-1)
       var curKeyValue = "theKey" + getID()
     }
-    localStorage.setItem(curKeyValue, curTextValue);
-
+    localStorage.setItem(curKeyValue, curTextValue,);
     //$('.show-text').append('<li>' + curTextValue + '</li>');
     //console.log(localStorage[0])
+    var obj = {}
+    obj.key = localStorage
+    console.log(obj)
     iterator(localStorage)
     
   });
@@ -55,20 +58,69 @@ $(document).ready(function(){
     // clear local storage
     localStorage.clear();
     $(".show-text").empty();
-
+    
   });
 
+ // $(document).on('dblclick','li', function(){
+ //        $(this).toggleClass('strike').fadeOut('slow'); 
+
+ //      });
 
 
-  $("ul").on("dblclick", function() {
-    console.log(event)
-    var itemName = event.srcElement.textContent;
-    for(var key in localStorage){
-      if(localStorage[key] === itemName) {
+  $(".edit").on('click', function() {
+    console.log()
+    if($('input[type=checkbox]').prop('checked')) {
+     
+      }
+    
+  })
+      
+  
+    $("ul").on('dblclick', function(){
+    console.log(event.target.dataset)
+
+    var itemName = event.target.dataset.key;
+    
+    for (key in localStorage) {
+      if(key ===  itemName)  {
         localStorage.removeItem(key);
       }
     }
     iterator(localStorage)
   })
+
+  
+  // $("ul").on('dblclick', function(){
+  //   console.log(event)
+  //   var itemName = event.target.innerText;
+  //   for(var key in localStorage){
+      
+  //     if(localStorage[key] ===  itemName)  {
+  //       localStorage.removeItem(key);
+  //     }
+  //   }
+  //   iterator(localStorage)
+  // })
+
+
+  // $("ul").on('dblclick', function(){
+  //   console.log(event)
+  //   var itemName = event.path[6].localStorage;
+  //   for(var key in localStorage){
+  //     for(var key1 in itemName){
+  //       console.log(key1)
+  //       if(key === key1) {
+  //         localStorage.removeItem(key);
+  //       }
+  //     }
+  //   }
+  //   iterator(localStorage)
+  // })
+
+
+
+
+
+
   iterator(localStorage)
 });
